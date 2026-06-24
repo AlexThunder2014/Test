@@ -1,10 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>Meine Webseite</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Super App PRO</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
+  margin:0;
+}
+
+h1{
+  text-align:center;
+  padding:15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:10px;
+}
+
+.card{
+  background:#1e293b;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+}
+
+button{
+  font-size:16px;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+#out{
+  margin:10px;
+  padding:15px;
+  background:#111827;
+  border-radius:12px;
+  min-height:120px;
+}
+</style>
 </head>
+
 <body>
-    <h1>Hallo Welt!</h1>
-    <p>Meine erste GitHub-Page.</p>
+
+<h1>🚀 Super App PRO</h1>
+
+<div class="grid">
+<div class="card"><button onclick="chat()">💬 ChatGPT</button></div>
+<div class="card"><button onclick="quiz()">🧠 Quiz</button></div>
+<div class="card"><button onclick="geo()">🌍 Geografie</button></div>
+<div class="card"><button onclick="english()">🇬🇧 Englisch</button></div>
+<div class="card"><button onclick="calc()">🧮 Rechner</button></div>
+<div class="card"><button onclick="reaction()">⚡ Reaktionstest</button></div>
+<div class="card"><button onclick="todo()">📝 ToDo</button></div>
+<div class="card"><button onclick="motivation()">⭐ Motivation</button></div>
+<div class="card"><button onclick="joke()">😂 Witz</button></div>
+<div class="card"><button onclick="dice()">🎲 Würfel</button></div>
+<div class="card"><button onclick="clock()">⏰ Uhr</button></div>
+<div class="card"><button onclick="level()">🏆 Level</button></div>
+</div>
+
+<div id="out">Willkommen in Super App PRO!</div>
+
+<script>
+let xp = parseInt(localStorage.getItem('xp') || 0);
+
+function show(t){
+  document.getElementById('out').innerHTML = t;
+}
+
+function addXP(n){
+  xp += n;
+  localStorage.setItem('xp', xp);
+}
+
+function chat(){
+  window.open('https://chatgpt.com','_blank');
+}
+
+function quiz(){
+  addXP(5);
+  const q = [
+    'Kontinente? 7',
+    'Hauptstadt Frankreich? Paris',
+    'Größter Ozean? Pazifik'
+  ];
+  show(q[Math.floor(Math.random()*q.length)]);
+}
+
+function geo(){
+  addXP(5);
+  show('Hauptstadt Kanada? Ottawa');
+}
+
+function english(){
+  addXP(5);
+  show('House = Haus');
+}
+
+function calc(){
+  let a = Math.floor(Math.random()*50);
+  let b = Math.floor(Math.random()*50);
+  show(a + ' + ' + b);
+}
+
+function reaction(){
+  show('Warte auf Signal...');
+  setTimeout(()=>show('JETZT! ⚡'),3000);
+}
+
+function todo(){
+  let t = prompt('Aufgabe:');
+  if(t) show('Gespeichert: ' + t);
+}
+
+function motivation(){
+  show('Du schaffst das! 💪');
+}
+
+function joke(){
+  show('Warum lernen Computer nie aus? Updates 😄');
+}
+
+function dice(){
+  show('🎲 ' + (Math.floor(Math.random()*6)+1));
+}
+
+function clock(){
+  show(new Date().toLocaleString());
+}
+
+function level(){
+  show('XP: ' + xp + ' | Level: ' + Math.floor(xp/50 + 1));
+}
+</script>
+
 </body>
 </html>
