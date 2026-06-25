@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AWorld</title>title>
+
+<title>AWorld V1.2</title>
 
 <style>
 body{
-  font-family:Arial;
+  font-family:Arial,sans-serif;
   background:#0b1220;
   color:white;
   margin:0;
@@ -33,9 +34,11 @@ h1{
 }
 
 button{
+  width:100%;
   font-size:16px;
   padding:10px;
   border-radius:10px;
+  border:none;
   cursor:pointer;
 }
 
@@ -44,103 +47,360 @@ button{
   padding:15px;
   background:#111827;
   border-radius:12px;
-  min-height:120px;
+  min-height:150px;
+}
+
+.clock{
+  position:fixed;
+  top:10px;
+  right:10px;
+  background:#1e293b;
+  padding:10px;
+  border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>AWorld</h1>
-
-<div class="grid">
-<div class="card"><button onclick="chat()">💬 ChatGPT</button></div>
-<div class="card"><button onclick="quiz()">🧠 Quiz</button></div>
-<div class="card"><button onclick="geo()">🌍 Geografie</button></div>
-<div class="card"><button onclick="english()">🇬🇧 Englisch</button></div>
-<div class="card"><button onclick="calc()">🧮 Rechner</button></div>
-<div class="card"><button onclick="reaction()">⚡ Reaktionstest</button></div>
-<div class="card"><button onclick="todo()">📝 ToDo</button></div>
-<div class="card"><button onclick="motivation()">⭐ Motivation</button></div>
-<div class="card"><button onclick="joke()">😂 Witz</button></div>
-<div class="card"><button onclick="dice()">🎲 Würfel</button></div>
-<div class="card"><button onclick="clock()">⏰ Uhr</button></div>
-<div class="card"><button onclick="level()">🏆 Level</button></div>
+<div class="clock">
+⏰ <span id="liveclock"></span>
 </div>
 
-<div id="out">Willkommen in Super App PRO!</div>
+<h1>🌍 AWorld V1.2</h1>
+
+<div class="grid">
+
+<div class="card"><button onclick="chat()">💬 ChatGPT</button></div>
+<div class="card"><button onclick="quiz()">🧠 Quiz</button></div>
+
+<div class="card"><button onclick="geo()">🌍 Geografie</button></div>
+<div class="card"><button onclick="english()">🇬🇧 Englisch</button></div>
+
+<div class="card"><button onclick="calc()">🧮 Rechner</button></div>
+<div class="card"><button onclick="reaction()">⚡ Reaktionstest</button></div>
+
+<div class="card"><button onclick="todo()">📝 ToDo</button></div>
+<div class="card"><button onclick="motivation()">⭐ Motivation</button></div>
+
+<div class="card"><button onclick="joke()">😂 Witz</button></div>
+<div class="card"><button onclick="dice()">🎲 Würfel</button></div>
+
+<div class="card"><button onclick="clock()">⏰ Uhr</button></div>
+<div class="card"><button onclick="level()">🏆 Level</button></div>
+
+<div class="card"><button onclick="coin()">🪙 Münzwurf</button></div>
+<div class="card"><button onclick="rps()">✂️ Schere Stein Papier</button></div>
+
+<div class="card"><button onclick="wheel()">🎡 Glücksrad</button></div>
+<div class="card"><button onclick="guess()">🔢 Zahlenraten</button></div>
+
+<div class="card"><button onclick="memory()">🧠 Gedächtnistest</button></div>
+<div class="card"><button onclick="target()">🎯 Zielschuss</button></div>
+
+<div class="card"><button onclick="card()">🃏 Karte ziehen</button></div>
+
+</div>
+
+<div id="out">
+Willkommen in AWorld V1.2 🚀
+</div>
 
 <script>
+
 let xp = parseInt(localStorage.getItem('xp') || 0);
 
 function show(t){
-  document.getElementById('out').innerHTML = t;
+ document.getElementById("out").innerHTML = t;
 }
 
 function addXP(n){
-  xp += n;
-  localStorage.setItem('xp', xp);
+ xp += n;
+ localStorage.setItem("xp",xp);
 }
 
+setInterval(()=>{
+ document.getElementById("liveclock").innerHTML =
+ new Date().toLocaleTimeString();
+},1000);
+
 function chat(){
-  window.open('https://chatgpt.com','_blank');
+ window.open("https://chatgpt.com","_blank");
 }
 
 function quiz(){
-  addXP(5);
-  const q = [
-    'Kontinente? 7',
-    'Hauptstadt Frankreich? Paris',
-    'Größter Ozean? Pazifik'
-  ];
-  show(q[Math.floor(Math.random()*q.length)]);
+
+ addXP(5);
+
+ const fragen = [
+  "Wie viele Kontinente gibt es? → 7",
+  "Hauptstadt von Frankreich? → Paris",
+  "Größter Ozean? → Pazifik",
+  "Hauptstadt von Deutschland? → Berlin"
+ ];
+
+ show(
+ fragen[Math.floor(Math.random()*fragen.length)]
+ );
 }
 
 function geo(){
-  addXP(5);
-  show('Hauptstadt Kanada? Ottawa');
+
+ addXP(5);
+
+ const geo = [
+  "Kanada → Ottawa",
+  "Spanien → Madrid",
+  "Japan → Tokio",
+  "Italien → Rom"
+ ];
+
+ show(
+ geo[Math.floor(Math.random()*geo.length)]
+ );
 }
 
 function english(){
-  addXP(5);
-  show('House = Haus');
+
+ addXP(5);
+
+ const vokabeln = [
+  "House = Haus",
+  "Dog = Hund",
+  "School = Schule",
+  "Book = Buch"
+ ];
+
+ show(
+ vokabeln[Math.floor(Math.random()*vokabeln.length)]
+ );
 }
 
 function calc(){
-  let a = Math.floor(Math.random()*50);
-  let b = Math.floor(Math.random()*50);
-  show(a + ' + ' + b);
+
+ let a = Math.floor(Math.random()*50);
+ let b = Math.floor(Math.random()*50);
+
+ show(
+ "<h2>"+a+" + "+b+" = ?</h2>"
+ );
+
 }
 
 function reaction(){
-  show('Warte auf Signal...');
-  setTimeout(()=>show('JETZT! ⚡'),3000);
+
+ show("⚡ Warte...");
+
+ setTimeout(()=>{
+   show("<h1>JETZT!</h1>");
+ },3000);
+
 }
 
 function todo(){
-  let t = prompt('Aufgabe:');
-  if(t) show('Gespeichert: ' + t);
+
+ let t = prompt("Neue Aufgabe:");
+
+ if(t){
+   show("📝 Gespeichert:<br>"+t);
+ }
+
 }
 
 function motivation(){
-  show('Du schaffst das! 💪');
+
+ const s = [
+  "Du schaffst das! 💪",
+  "Bleib dran! 🚀",
+  "Heute wird ein guter Tag ⭐",
+  "Nicht aufgeben! 🔥"
+ ];
+
+ show(
+ s[Math.floor(Math.random()*s.length)]
+ );
+
 }
 
 function joke(){
-  show('Warum lernen Computer nie aus? Updates 😄');
+
+ const witze = [
+  "Warum lernen Computer nie aus? Updates 😄",
+  "Warum mögen Programmierer dunkle Räume? Weil Bugs das Licht meiden 😂",
+  "Treffen sich zwei Pixel. Sagt der eine: Du siehst aber unscharf aus!"
+ ];
+
+ show(
+ witze[Math.floor(Math.random()*witze.length)]
+ );
+
 }
 
 function dice(){
-  show('🎲 ' + (Math.floor(Math.random()*6)+1));
+
+ show("🎲 Würfelt...");
+
+ setTimeout(()=>{
+
+ let zahl =
+ Math.floor(Math.random()*6)+1;
+
+ show(
+ "<h1>🎲 "+zahl+"</h1>"
+ );
+
+ },1000);
+
+ addXP(5);
+
 }
 
 function clock(){
-  show(new Date().toLocaleString());
+
+ show(
+ new Date().toLocaleString()
+ );
+
 }
 
 function level(){
-  show('XP: ' + xp + ' | Level: ' + Math.floor(xp/50 + 1));
+
+ show(
+ "🏆 XP: "+xp+
+ "<br>Level: "+
+ Math.floor(xp/50+1)
+ );
+
 }
+
+function coin(){
+
+ let s =
+ Math.random()<0.5
+ ? "🪙 Kopf"
+ : "🪙 Zahl";
+
+ show("<h1>"+s+"</h1>");
+
+ addXP(3);
+
+}
+
+function rps(){
+
+ const a = [
+ "🪨 Stein",
+ "📄 Papier",
+ "✂️ Schere"
+ ];
+
+ show(
+ "<h2>"+a[Math.floor(Math.random()*3)]+"</h2>"
+ );
+
+ addXP(5);
+
+}
+
+function wheel(){
+
+ const preise = [
+ "⭐ +10 XP",
+ "🏆 Jackpot",
+ "🎁 Bonus",
+ "💪 Motivation",
+ "😂 Witz"
+ ];
+
+ show("🎡 Dreht...");
+
+ setTimeout(()=>{
+
+ show(
+ preise[Math.floor(Math.random()*preise.length)]
+ );
+
+ },1500);
+
+ addXP(10);
+
+}
+
+function guess(){
+
+ let geheim =
+ Math.floor(Math.random()*10)+1;
+
+ let tipp =
+ prompt("Rate eine Zahl von 1 bis 10");
+
+ if(Number(tipp)===geheim){
+
+   show("🎉 Richtig!");
+
+   addXP(15);
+
+ }else{
+
+   show("❌ Falsch! Zahl war "+geheim);
+
+ }
+
+}
+
+function memory(){
+
+ let zahl =
+ Math.floor(Math.random()*9000)+1000;
+
+ show(
+ "Merke dir diese Zahl:<br><h1>"+zahl+"</h1>"
+ );
+
+ setTimeout(()=>{
+   show("🤔 Hast du sie dir gemerkt?");
+ },3000);
+
+ addXP(5);
+
+}
+
+function target(){
+
+ let treffer =
+ Math.floor(Math.random()*100);
+
+ if(treffer > 70){
+
+  show("🎯 Volltreffer!");
+
+  addXP(20);
+
+ }else{
+
+  show("😅 Daneben!");
+
+ }
+
+}
+
+function card(){
+
+ const karten = [
+ "♠️ Ass",
+ "♥️ König",
+ "♦️ Dame",
+ "♣️ Bube"
+ ];
+
+ show(
+ "<h2>"+karten[Math.floor(Math.random()*karten.length)]+"</h2>"
+ );
+
+ addXP(2);
+
+}
+
 </script>
 
 </body>
